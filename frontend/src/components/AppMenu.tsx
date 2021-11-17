@@ -1,17 +1,17 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
+import { Outlet, Link } from "react-router-dom";
 
 const AppMenu: React.FC = () => {
     return (
         <>
             <Box sx={{ width: 500 }}>
-                <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                    <Button>New Order</Button>
-                    <Button>View Order</Button>
-                    <Button>View Transaction</Button>
-                </ButtonGroup>
+                <nav>
+                    <Link to="/view-orders">Invoices</Link> |{" "}
+                    <Link to="/create-orders">Expenses</Link> |{" "}
+                    <Link to="/view-transactions">Expenses</Link>
+                </nav>
+                <Outlet />
             </Box>
         </>
     )

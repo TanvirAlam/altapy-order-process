@@ -14,7 +14,6 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import { BrowserRouter } from "react-router-dom";
 
 import AppMenu from "./AppMenu";
 

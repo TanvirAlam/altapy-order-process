@@ -6,11 +6,11 @@ type State = IOrder & {
     submitted: boolean
 }
 
-export default class OrderForm extends Component<Props, State> {
+export default class OrderView extends Component<Props, State> {
     render() {
         return (
             <div>
-                Order Form
+                Order View
             </div>
         );
     }
