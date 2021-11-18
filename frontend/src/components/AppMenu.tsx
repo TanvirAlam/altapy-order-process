@@ -1,18 +1,15 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 const AppMenu: React.FC = () => {
     return (
         <>
-            <Box sx={{ width: 500 }}>
-                <nav>
-                    <Link to="/view-orders">Invoices</Link> |{" "}
-                    <Link to="/create-orders">Expenses</Link> |{" "}
-                    <Link to="/view-transactions">Expenses</Link>
-                </nav>
-                <Outlet />
-            </Box>
+            <nav>
+                <Button component={Link} to="/create-orders">Create Order</Button>
+                <Button component={Link} to="/view-orders">View Orders</Button>
+                <Button component={Link} to="/view-transactions">View Transaction</Button>
+            </nav>
         </>
     )
 }

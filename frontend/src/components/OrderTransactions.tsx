@@ -1,17 +1,23 @@
-import React, { Component } from 'react';
-import IOrder from "../types/order.type";
-type Props = {};
+import React from 'react';
+import Box from "@mui/material/Box";
 
-type State = IOrder & {
-    submitted: boolean
-}
-
-export default class OrderTransactions extends Component<Props, State> {
-    render() {
-        return (
-            <div>
+const OrderTransactions: React.FC = () => {
+    return (
+        <div>
+            <Box sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', md: 'row' },
+                alignItems: 'center',
+                justifyContent: 'center',
+                overflow: 'hidden',
+                borderRadius: '12px',
+                boxShadow: 1,
+                fontWeight: 'bold',
+            }}>
                 Order Transactions
-            </div>
-        );
-    }
+            </Box>
+        </div>
+    );
 }
+
+export default OrderTransactions;

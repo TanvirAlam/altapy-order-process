@@ -1,23 +1,19 @@
 import React from "react";
-import OrderDashboard  from "./components/OrderDashboard";
+import Dashboard  from "./components/Dashboard";
 import { StyledEngineProvider } from '@mui/material/styles';
-import {
-    Routes,
-    Route
-} from "react-router-dom";
-
+import { Routes, Route } from "react-router-dom";
 import OrderForm from "./components/OrderForm";
-import OrderView from "./components/OrderView";
+import OrderDetails from "./components/OrderDetails";
 import OrderTransactions from "./components/OrderTransactions";
 
 function App() {
   return (
       <>
           <StyledEngineProvider injectFirst>
-              <OrderDashboard />
+              <Dashboard />
           </StyledEngineProvider>
           <Routes>
-              <Route path="/view-orders" element={<OrderView />} />
+              <Route path="/view-orders" element={<OrderDetails />} />
               <Route path="/create-orders" element={<OrderForm />} />
               <Route path="/view-transactions" element={<OrderTransactions />} />
           </Routes>
