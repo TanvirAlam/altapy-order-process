@@ -10,20 +10,24 @@ const OrderForm: React.FC = () => {
     const [description, setDescription] = useState('');
     const [quantity, setQuantity] = useState(0);
     const [price, setPrice] = useState(0);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const handleSubmitForm = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const newOrder: INewOrder = {
-            orderLines: {
-                code: code,
-                description: description,
-                quantity: quantity,
-                price: price
-            }
+            orderLines: [
+                {
+                    code: code,
+                    description: description,
+                    quantity: quantity,
+                    price: price
+                }
+            ]
         };
 
         await axiosRequest.create(newOrder)
             .then((response: any) => {
+                setIsSubmitted(true);
                 console.log(response.data);
             }).catch((e: Error) => {
                 console.log(e);

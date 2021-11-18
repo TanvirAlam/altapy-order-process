@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import axiosRequest from "../services/axios-request";
 import ButtonBase from '@mui/material/ButtonBase';
 import { styled } from '@mui/material/styles';
+import Divider from '@mui/material/Divider';
 
 const Img = styled('img')({
     margin: 'auto',
@@ -30,7 +31,7 @@ const OrderDetails: React.FC = () => {
     useEffect(() => {
         getAllOrders();
     }, []);
-
+    console.log(orders)
     return (
         <div>
             <Box sx={{
@@ -48,50 +49,56 @@ const OrderDetails: React.FC = () => {
                     {
                         orders.length > 0 && orders.map((order: any) => {
                             return (
-                                <Grid container spacing={6} key={order.id}>
-                                    <Grid item sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                                        <ButtonBase sx={{ width: 128, height: 128 }}>
-                                            <Img alt="complex" src={process.env.PUBLIC_URL + '/images/img.png'} />
-                                        </ButtonBase>
-                                    </Grid>
-                                    <Grid item xs={12} sm container>
-                                        <Grid item xs container direction="column" spacing={2}>
-                                            {
-                                                order.orderLines.length > 0 && order.orderLines.map((orderLine: any) => {
-                                                    return (
-                                                        <Grid item xs key={orderLine.id}>
-                                                            <Typography variant="body2" gutterBottom>
-                                                                DESCRIPTION: {orderLine.description}
-                                                            </Typography>
-                                                            <Typography variant="body2" color="text.secondary">
-                                                                ID: {orderLine.code}
-                                                            </Typography>
-                                                        </Grid>
-                                                    )
-                                                })
-                                            }
-                                            <Grid item sx={{ display: "flex" }}>
-                                                <Typography sx={{ cursor: 'pointer', marginRight: '1rem' }} variant="body2">
-                                                    Reserve
-                                                </Typography>
-                                                <Typography sx={{ cursor: 'pointer', marginRight: '1rem' }} variant="body2">
-                                                    Release
-                                                </Typography>
-                                                <Typography sx={{ cursor: 'pointer', marginRight: '1rem' }} variant="body2">
-                                                    Refund
-                                                </Typography>
-                                                <Typography sx={{ cursor: 'pointer', marginRight: '1rem' }} variant="body2">
-                                                    Capture
+                                <div key={order.id}>
+                                    <Divider />
+                                    <Divider />
+                                    <Grid container spacing={6}>
+                                        <Grid item sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                                            <ButtonBase sx={{ width: 128, height: 128 }}>
+                                                <Img alt="complex" src={process.env.PUBLIC_URL + '/images/img.png'} />
+                                            </ButtonBase>
+                                        </Grid>
+                                        <Grid item xs={12} sm container>
+                                            <Grid item xs container direction="column" spacing={2} sx={{padding: '2rem'}}>
+                                                {
+                                                    order.orderLines.length > 0 && order.orderLines.map((orderLine: any) => {
+                                                        return (
+                                                            <Grid item xs key={orderLine.id}>
+                                                                <Typography variant="body2" gutterBottom>
+                                                                    DESCRIPTION: {orderLine.description}
+                                                                </Typography>
+                                                                <Typography variant="body2" color="text.secondary">
+                                                                    ID: {orderLine.code}
+                                                                </Typography>
+                                                            </Grid>
+                                                        )
+                                                    })
+                                                }
+                                                <Grid item sx={{ display: "flex" }}>
+                                                    <Typography sx={{ cursor: 'pointer', padding: '1rem' }} variant="body2">
+                                                        Reserve
+                                                    </Typography>
+                                                    <Typography sx={{ cursor: 'pointer', padding: '1rem' }} variant="body2">
+                                                        Release
+                                                    </Typography>
+                                                    <Typography sx={{ cursor: 'pointer', padding: '1rem' }} variant="body2">
+                                                        Refund
+                                                    </Typography>
+                                                    <Typography sx={{ cursor: 'pointer', padding: '1rem' }} variant="body2">
+                                                        Capture
+                                                    </Typography>
+                                                </Grid>
+                                            </Grid>
+                                            <Grid item>
+                                                <Typography variant="subtitle1" component="div">
+                                                    ${order.orderAmount}
                                                 </Typography>
                                             </Grid>
                                         </Grid>
-                                        <Grid item>
-                                            <Typography variant="subtitle1" component="div">
-                                                ${order.orderAmount}
-                                            </Typography>
-                                        </Grid>
                                     </Grid>
-                                </Grid>
+                                    <Divider />
+                                    <Divider />
+                                </div>
                             )
                         })
                     }
