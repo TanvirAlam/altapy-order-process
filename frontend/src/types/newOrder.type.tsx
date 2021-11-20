@@ -1,10 +1,8 @@
 export default interface INewOrder {
-    orderLines: [
-        {
-            code: string,
-            description: string,
-            quantity: number,
-            price: number
-        }
-    ]
+    orderLines: {
+        code: string,
+        description: string,
+        quantity: number,
+        price: number
+    }
 }
