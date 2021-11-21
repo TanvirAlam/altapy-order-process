@@ -23,7 +23,7 @@ class OrderBoard extends Component {
                 }}>
                     <Paper sx={{ p: 2, margin: 'auto', maxWidth: 700, flexGrow: 1}}>
                         <Routes>
-                            <Route path="/" element={<Navigate to="/view-orders/:showFeature" />} />
+                            <Route path="/" element={<Navigate to="/view-orders/orders" />} />
                             <Route path="/create-orders" element={<OrderForm />} />
                             <Route path="/view-orders/:showFeature" element={<OrderDetails />} />
                             <Route path="/view-orders/:showFeature" element={<OrderDetails />} />

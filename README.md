@@ -45,9 +45,9 @@
 
 ### Further improvements:
 
-- Separate `OrderForm.tsx` into more smaller reusable components.
+- Separate `OrderForm.tsx` into more smaller reusable components. {Singleton Pattern}
 - Add spinner on each async load
 - Need to redirect after order creation
 - Fix `Reset` button is not Working
 - Try adding random image per order
-- etc keep imporoving it
+- etc keep improving it
