@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
-import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axiosRequest from "../services/axios-request";
@@ -52,131 +51,117 @@ const OrderForm: React.FC<{}> = () => {
 
     return (
         <div>
-            <Box sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-                borderRadius: '12px',
-                boxShadow: 1,
-                fontWeight: 'bold',
-                padding: '2rem',
-                '& .MuiTextField-root': { m: 1, width: '25ch' },
-            }}>
-                <Formik initialValues={initialValues}
-                        validationSchema={Yup.object().shape({
-                            orderLines: Yup.object().shape({
-                                code: Yup.string().required('Code is required'),
-                                description: Yup.string().required('Description is required'),
-                                quantity: Yup.number().integer().min(100).required('Quantity is required'),
-                                price: Yup.number().integer().min(100).required('Price is required')
-                            })
-                        })}
-                        onSubmit={handleFromSubmit}>
-                    {({
-                          errors,
-                          handleBlur,
-                          handleChange,
-                          handleSubmit,
-                          isSubmitting,
-                          isValid,
-                          dirty,
-                          touched,
-                          values
-                      }) => (
-                            <form autoComplete="off" noValidate onSubmit={handleSubmit}>
-                                console.log(values)
-                                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                                    <Grid item xs={6}>
-                                        <Item sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-                                            <TextField
-                                                id="code"
-                                                label="Code"
-                                                type="text"
-                                                name="orderLines.code"
-                                                size="small"
-                                                style={{width: '98%'}}
-                                                helperText={touched.orderLines?.code && errors.orderLines?.code || "eg: 'ABCD123123'"}
-                                                value={values.orderLines.code}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                error={Boolean(errors.orderLines?.code && touched.orderLines?.code)}
-                                            />
-                                            <IconButton color="inherit" onClick={() => generateCode(values)}>
-                                                Generate
-                                            </IconButton>
-                                        </Item>
+            <Formik initialValues={initialValues}
+                    validationSchema={Yup.object().shape({
+                        orderLines: Yup.object().shape({
+                            code: Yup.string().required('Code is required'),
+                            description: Yup.string().required('Description is required'),
+                            quantity: Yup.number().integer().min(100).required('Quantity is required'),
+                            price: Yup.number().integer().min(100).required('Price is required')
+                        })
+                    })}
+                    onSubmit={handleFromSubmit}>
+                {({
+                      errors,
+                      handleBlur,
+                      handleChange,
+                      handleSubmit,
+                      isSubmitting,
+                      isValid,
+                      dirty,
+                      touched,
+                      values
+                  }) => (
+                        <form autoComplete="off" noValidate onSubmit={handleSubmit}>
+                            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                                <Grid item xs={6}>
+                                    <Item sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                                        <TextField
+                                            id="code"
+                                            label="Code"
+                                            type="text"
+                                            name="orderLines.code"
+                                            size="small"
+                                            style={{width: '98%'}}
+                                            helperText={touched.orderLines?.code && errors.orderLines?.code || "eg: 'ABCD123123'"}
+                                            value={values.orderLines.code}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            error={Boolean(errors.orderLines?.code && touched.orderLines?.code)}
+                                        />
+                                        <IconButton color="inherit" onClick={() => generateCode(values)}>
+                                            Generate
+                                        </IconButton>
+                                    </Item>
 
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <Item>
-                                            <TextField
-                                                id="description"
-                                                label="Description"
-                                                multiline
-                                                maxRows={4}
-                                                name="orderLines.description"
-                                                helperText={touched.orderLines?.description && errors.orderLines?.description}
-                                                size="small"
-                                                style={{width: '98%'}}
-                                                value={values.orderLines.description}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                error={Boolean(errors.orderLines?.description && touched.orderLines?.description)}
-                                            />
-                                        </Item>
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <Item>
-                                            <TextField
-                                                id="quantity"
-                                                label="Quantity"
-                                                type="number"
-                                                name="orderLines.quantity"
-                                                helperText={touched.orderLines?.quantity && errors.orderLines?.quantity}
-                                                size="small"
-                                                style={{width: '98%'}}
-                                                value={values.orderLines.quantity}
-                                                onBlur={handleBlur}
-                                                onChange={handleChange}
-                                                error={Boolean(errors.orderLines?.quantity && touched.orderLines?.quantity)}
-                                            />
-                                        </Item>
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <Item>
-                                            <TextField
-                                                id="price"
-                                                label="Price"
-                                                type="number"
-                                                name="orderLines.price"
-                                                size="small"
-                                                InputProps={{
-                                                    startAdornment: <InputAdornment position="start">$</InputAdornment>,
-                                                }}
-                                                style={{width: '98%'}}
-                                                helperText={touched.orderLines?.price && errors.orderLines?.price}
-                                                value={values.orderLines.price}
-                                                onBlur={handleBlur}
-                                                onChange={handleChange}
-                                                error={Boolean(errors.orderLines?.price && touched.orderLines?.price)}
-                                            />
-                                        </Item>
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Collapse in={isFromValidated}>
-                                            <Item>
-                                                <Button variant="outlined" type="submit" disabled={Boolean(!isValid)}>Create</Button>
-                                                <Button variant="outlined" type="button">Reset</Button>
-                                            </Item>
-                                        </Collapse>
-                                    </Grid>
                                 </Grid>
-                            </form>
-                    )}
-                </Formik>
-            </Box>
+                                <Grid item xs={6}>
+                                    <Item>
+                                        <TextField
+                                            id="description"
+                                            label="Description"
+                                            multiline
+                                            maxRows={4}
+                                            name="orderLines.description"
+                                            helperText={touched.orderLines?.description && errors.orderLines?.description}
+                                            size="small"
+                                            style={{width: '98%'}}
+                                            value={values.orderLines.description}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            error={Boolean(errors.orderLines?.description && touched.orderLines?.description)}
+                                        />
+                                    </Item>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Item>
+                                        <TextField
+                                            id="quantity"
+                                            label="Quantity"
+                                            type="number"
+                                            name="orderLines.quantity"
+                                            helperText={touched.orderLines?.quantity && errors.orderLines?.quantity}
+                                            size="small"
+                                            style={{width: '98%'}}
+                                            value={values.orderLines.quantity}
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            error={Boolean(errors.orderLines?.quantity && touched.orderLines?.quantity)}
+                                        />
+                                    </Item>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Item>
+                                        <TextField
+                                            id="price"
+                                            label="Price"
+                                            type="number"
+                                            name="orderLines.price"
+                                            size="small"
+                                            InputProps={{
+                                                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                                            }}
+                                            style={{width: '98%'}}
+                                            helperText={touched.orderLines?.price && errors.orderLines?.price}
+                                            value={values.orderLines.price}
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            error={Boolean(errors.orderLines?.price && touched.orderLines?.price)}
+                                        />
+                                    </Item>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Collapse in={isFromValidated}>
+                                        <Item>
+                                            <Button variant="outlined" type="submit" disabled={Boolean(!isValid)}>Create</Button>
+                                            <Button variant="outlined" type="button">Reset</Button>
+                                        </Item>
+                                    </Collapse>
+                                </Grid>
+                            </Grid>
+                        </form>
+                )}
+            </Formik>
         </div>
     );
 }

@@ -1,10 +1,6 @@
 import React from "react";
 import Dashboard  from "./components/Dashboard";
 import { StyledEngineProvider } from '@mui/material/styles';
-import { Routes, Route, Navigate } from "react-router-dom";
-import OrderForm from "./components/OrderForm";
-import OrderDetails from "./components/OrderDetails";
-import OrderTransactions from "./components/OrderTransactions";
 
 function App() {
   return (
@@ -12,12 +8,6 @@ function App() {
           <StyledEngineProvider injectFirst>
               <Dashboard />
           </StyledEngineProvider>
-          <Routes>
-              <Route path="/" element={<Navigate to="/view-orders" />} />
-              <Route path="/view-orders" element={<OrderDetails />} />
-              <Route path="/create-orders" element={<OrderForm />} />
-              <Route path="/view-transactions" element={<OrderTransactions />} />
-          </Routes>
       </>
   );
 }

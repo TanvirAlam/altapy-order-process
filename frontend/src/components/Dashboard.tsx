@@ -2,6 +2,7 @@ import React from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import Paper from '@mui/material/Paper';
 import AppMenu from "./AppMenu";
+import OrderBoard from "./OrderBoard";
 
 const Dashboard: React.FC = () => {
     return (
@@ -17,6 +18,7 @@ const Dashboard: React.FC = () => {
                     }}>
                     <AppMenu />
                 </BottomNavigation>
+                <OrderBoard />
             </Paper>
         </div>
     );

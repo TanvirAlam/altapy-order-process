@@ -39,65 +39,53 @@ const OrderDetails: React.FC<ParentCompProps> = () => {
 
     return (
         <div>
-            <Box sx={{
-                display: 'flex',
-                flexDirection: { xs: 'column', md: 'row' },
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-                borderRadius: '12px',
-                boxShadow: 1,
-                fontWeight: 'bold',
-                padding: '2rem'
-            }}>
-                <Paper sx={{ p: 2, margin: 'auto', maxWidth: 700, flexGrow: 1}}>
-                    {
-                        orders.length > 0 && orders.map((order: any) => {
-                            return (
-                                <div key={order.id}>
-                                    <Divider />
-                                    <Divider />
-                                    <Grid container spacing={6}>
-                                        <Grid item sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                                            <ButtonBase sx={{ width: 128, height: 128 }}>
-                                                <Img alt="complex" src={process.env.PUBLIC_URL + '/images/img.png'} />
-                                            </ButtonBase>
+            <Paper sx={{ p: 2, margin: 'auto', maxWidth: 700, flexGrow: 1}}>
+                {
+                    orders.length > 0 && orders.map((order: any) => {
+                        return (
+                            <div key={order.id}>
+                                <Divider />
+                                <Divider />
+                                <Grid container spacing={6}>
+                                    <Grid item sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                                        <ButtonBase sx={{ width: 128, height: 128 }}>
+                                            <Img alt="complex" src={process.env.PUBLIC_URL + '/images/img.png'} />
+                                        </ButtonBase>
+                                    </Grid>
+                                    <Grid item xs={12} sm container>
+                                        <Grid item xs container direction="column" spacing={2} sx={{padding: '2rem'}}>
+                                            {
+                                                order.orderLines.length > 0 && order.orderLines.map((orderLine: any) => {
+                                                    return (
+                                                        <Grid item xs key={orderLine.id}>
+                                                            <Typography variant="body2" gutterBottom>
+                                                                DESCRIPTION: {orderLine.description}
+                                                            </Typography>
+                                                            <Typography variant="body2" color="text.secondary">
+                                                                ID: {orderLine.code}
+                                                            </Typography>
+                                                        </Grid>
+                                                    )
+                                                })
+                                            }
+                                            <Grid item sx={{ display: "flex" }}>
+                                                <ActionButtons orderId={order.id} />
+                                            </Grid>
                                         </Grid>
-                                        <Grid item xs={12} sm container>
-                                            <Grid item xs container direction="column" spacing={2} sx={{padding: '2rem'}}>
-                                                {
-                                                    order.orderLines.length > 0 && order.orderLines.map((orderLine: any) => {
-                                                        return (
-                                                            <Grid item xs key={orderLine.id}>
-                                                                <Typography variant="body2" gutterBottom>
-                                                                    DESCRIPTION: {orderLine.description}
-                                                                </Typography>
-                                                                <Typography variant="body2" color="text.secondary">
-                                                                    ID: {orderLine.code}
-                                                                </Typography>
-                                                            </Grid>
-                                                        )
-                                                    })
-                                                }
-                                                <Grid item sx={{ display: "flex" }}>
-                                                    <ActionButtons orderId={order.id} />
-                                                </Grid>
-                                            </Grid>
-                                            <Grid item>
-                                                <Typography variant="subtitle1" component="div">
-                                                    ${order.orderAmount}
-                                                </Typography>
-                                            </Grid>
+                                        <Grid item>
+                                            <Typography variant="subtitle1" component="div">
+                                                ${order.orderAmount}
+                                            </Typography>
                                         </Grid>
                                     </Grid>
-                                    <Divider />
-                                    <Divider />
-                                </div>
-                            )
-                        })
-                    }
-                </Paper>
-            </Box>
+                                </Grid>
+                                <Divider />
+                                <Divider />
+                            </div>
+                        )
+                    })
+                }
+            </Paper>
         </div>
     );
 }
