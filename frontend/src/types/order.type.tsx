@@ -1,6 +1,6 @@
 export interface transactions {}
 
-export interface IOrderLines {
+interface IOrderLines {
     id: string,
     code: string,
     description: string,

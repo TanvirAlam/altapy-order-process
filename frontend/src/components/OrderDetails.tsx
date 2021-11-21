@@ -8,6 +8,7 @@ import axiosRequest from "../services/axios-request";
 import ButtonBase from '@mui/material/ButtonBase';
 import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
+import {ActionButtons} from './ActionButtons';
 
 const Img = styled('img')({
     margin: 'auto',
@@ -16,7 +17,11 @@ const Img = styled('img')({
     maxHeight: '100%',
 });
 
-const OrderDetails: React.FC = () => {
+interface ParentCompProps {
+    childComp?: React.ReactNode;
+}
+
+const OrderDetails: React.FC<ParentCompProps> = () => {
     const [orders, setOrders] = useState<IOrder[]>([]);
 
     const getAllOrders = async () => {
@@ -31,7 +36,7 @@ const OrderDetails: React.FC = () => {
     useEffect(() => {
         getAllOrders();
     }, []);
-    console.log(orders)
+
     return (
         <div>
             <Box sx={{
@@ -75,18 +80,7 @@ const OrderDetails: React.FC = () => {
                                                     })
                                                 }
                                                 <Grid item sx={{ display: "flex" }}>
-                                                    <Typography sx={{ cursor: 'pointer', padding: '1rem' }} variant="body2">
-                                                        Reserve
-                                                    </Typography>
-                                                    <Typography sx={{ cursor: 'pointer', padding: '1rem' }} variant="body2">
-                                                        Release
-                                                    </Typography>
-                                                    <Typography sx={{ cursor: 'pointer', padding: '1rem' }} variant="body2">
-                                                        Refund
-                                                    </Typography>
-                                                    <Typography sx={{ cursor: 'pointer', padding: '1rem' }} variant="body2">
-                                                        Capture
-                                                    </Typography>
+                                                    <ActionButtons orderId={order.id} />
                                                 </Grid>
                                             </Grid>
                                             <Grid item>

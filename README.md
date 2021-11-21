@@ -6,3 +6,5 @@
 
 - GOTO: `cd technical-test-frontend` => `npm start`
 - OPEN BROWSER: GOTO: `http://localhost:3000/ 
+
+
