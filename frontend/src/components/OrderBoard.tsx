@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import {Navigate, Route, Routes} from "react-router-dom";
 import OrderDetails from "./OrderDetails";
 import OrderForm from "./OrderForm";
-import OrderTransactions from "./OrderTransactions";
+import Paper from '@mui/material/Paper';
 
 class OrderBoard extends Component {
     render() {
@@ -21,12 +21,14 @@ class OrderBoard extends Component {
                     padding: '2rem',
                     '& .MuiTextField-root': { m: 1, width: '25ch' },
                 }}>
-                    <Routes>
-                        <Route path="/" element={<Navigate to="/view-orders" />} />
-                        <Route path="/view-orders" element={<OrderDetails />} />
-                        <Route path="/create-orders" element={<OrderForm />} />
-                        <Route path="/view-transactions" element={<OrderTransactions />} />
-                    </Routes>
+                    <Paper sx={{ p: 2, margin: 'auto', maxWidth: 700, flexGrow: 1}}>
+                        <Routes>
+                            <Route path="/" element={<Navigate to="/view-orders/:showFeature" />} />
+                            <Route path="/create-orders" element={<OrderForm />} />
+                            <Route path="/view-orders/:showFeature" element={<OrderDetails />} />
+                            <Route path="/view-orders/:showFeature" element={<OrderDetails />} />
+                        </Routes>
+                    </Paper>
                 </Box>
             </div>
         );

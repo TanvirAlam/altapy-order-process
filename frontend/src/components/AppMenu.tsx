@@ -7,8 +7,8 @@ const AppMenu: React.FC = () => {
         <>
             <nav>
                 <Button component={Link} to="/create-orders">Create Order</Button>
-                <Button component={Link} to="/view-orders">View Orders</Button>
-                <Button component={Link} to="/view-transactions">View Transaction</Button>
+                <Button component={Link} to="/view-orders/orders">View Orders</Button>
+                <Button component={Link} to="/view-orders/transaction">View Transaction</Button>
             </nav>
         </>
     )
