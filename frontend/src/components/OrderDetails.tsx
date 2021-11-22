@@ -9,6 +9,7 @@ import Divider from '@mui/material/Divider';
 import {ActionButtons} from './ActionButtons';
 import { useParams } from "react-router-dom";
 import OrderTransactions from "./OrderTransactions";
+import ContextProvider from "../store/ContextProvider";
 
 const Img = styled('img')({
     margin: 'auto',
@@ -16,7 +17,6 @@ const Img = styled('img')({
     maxWidth: '100%',
     maxHeight: '100%',
 });
-
 
 const OrderDetails: React.FC = (props) => {
     const [orders, setOrders] = useState<IOrder[]>([]);
@@ -34,7 +34,7 @@ const OrderDetails: React.FC = (props) => {
     useEffect(() => {
         getAllOrders();
     }, []);
-
+    console.log(orders)
     return (
         <div>
             {
@@ -67,7 +67,16 @@ const OrderDetails: React.FC = (props) => {
                                         }
                                         <Grid item sx={{ display: "flex" }}>
                                             {
-                                                showFeature === "orders" ? (<ActionButtons orderId={order.id} />) : (<OrderTransactions />)
+                                                showFeature === "orders" ?
+                                                    (<ActionButtons orderId={order.id} />) :
+                                                    (
+                                                        <>
+                                                            <ContextProvider.Provider value={{transactions: order.transactions}}>
+                                                                {props.children}
+                                                                <OrderTransactions />
+                                                            </ContextProvider.Provider>
+                                                        </>
+                                                    )
                                             }
                                         </Grid>
                                     </Grid>
